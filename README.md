@@ -9,7 +9,7 @@ Start with 3.1.2, the developers could use Cocoapods to integrate HyphenateFull-
 
 		pod 'HyphenateFull-SDK'
 		
-2. Make sure to include our SDK libraries from your .h file::
+2. Make sure to include our SDK libraries from your .h file:
 
 		#import <HyphenateFull-SDK/EMSDKFull.h>
 		
