@@ -11,7 +11,7 @@ Start with 3.1.2, the developers could use Cocoapods to integrate HyphenateFull-
 		
 2. Make sure to include our SDK libraries from your .h file::
 
-		#import <HyphenateFullSDK/EMSDKFull.h>
+		#import <HyphenateFull-SDK/EMSDKFull.h>
 		
 And next, the developers could normally use all the features of HyphenateFull-SDK.
 
