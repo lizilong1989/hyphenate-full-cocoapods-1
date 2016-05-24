@@ -17,17 +17,19 @@
 
 #if TARGET_OS_IPHONE
 
-#import "EMSDK.h"
+#import "EMClient.h"
+#import "EMClientDelegate.h"
 #import "EMClient+Call.h"
 
 #import "EMCallSession.h"
 
 #else
 
-#import <HyphenateFullSDK/EMSDK.h>
-#import <HyphenateFullSDK/EMClient+Call.h>
+#import <HyphenateFull-SDK/EMClient.h>
+#import <HyphenateFull-SDK/EMClientDelegate.h>
+#import <HyphenateFull-SDK/EMClient+Call.h>
 
-#import <HyphenateFullSDK/EMCallSession.h>
+#import <HyphenateFull-SDK/EMCallSession.h>
 
 #endif
 
