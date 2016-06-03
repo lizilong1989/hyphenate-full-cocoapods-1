@@ -61,75 +61,66 @@
  */
 - (void)removeDelegate:(id<EMChatroomManagerDelegate>)aDelegate;
 
-#pragma mark - Api
 
 /*!
  *  \~chinese
  *  从服务器获取所有的聊天室
  *
- *  同步方法，会阻塞当前线程
- *
- *  @param pError   出错信息
- *
- *  @return 聊天室列表<EMChatroom>
+ *  @param aSuccessBlock         成功的回调
+ *  @param aFailureBlock         失败的回调
  *
  *  \~english
  *  Get all the chatrooms from server
  *
- *  Synchronization method will block the current thread
+ *  @param aSuccessBlock         The callback block of success
+ *  @param aFailureBlock         The callback block of failure
  *
- *  @param pError   Error
- *
- *  @return Chat room list<EMChatroom>
  */
-- (NSArray *)getAllChatroomsFromServerWithError:(EMError **)pError;
+- (void)asyncGetAllChatroomsFromServer:(void (^)(NSArray *aList))aSuccessBlock
+                               failure:(void (^)(EMError *aError))aFailureBlock;
 
 /*!
  *  \~chinese
  *  加入聊天室
  *
- *  同步方法，会阻塞当前线程
+ *  @param aChatroomId      聊天室的ID
+ *  @param aSuccessBlock    成功的回调
+ *  @param aFailureBlock    失败的回调
  *
- *  @param aChatroomId  聊天室的ID
- *  @param pError       返回的错误信息
- *
- *  @result 所加入的聊天室
  *
  *  \~english
  *  Join a chatroom
  *
- *  Synchronization method will block the current thread
+ *  @param aChatroomId      Chatroom id
+ *  @param aSuccessBlock    The callback block of success
+ *  @param aFailureBlock    The callback block of failure
  *
- *  @param aChatroomId  Chatroom id
- *  @param pError       Error
- *
- *  @result Joined chatroom
  */
-- (EMChatroom *)joinChatroom:(NSString *)aChatroomId
-                       error:(EMError **)pError;
+- (void)asyncJoinChatroom:(NSString *)aChatroomId
+                  success:(void (^)(EMChatroom *aRoom))aSuccessBlock
+                  failure:(void (^)(EMError *aError))aFailureBlock;
 
 /*!
  *  \~chinese
  *  退出聊天室
  *
- *  同步方法，会阻塞当前线程
+ *  @param aChatroomId          聊天室ID
+ *  @param aSuccessBlock        成功的回调
+ *  @param aFailureBlock        失败的回调
  *
- *  @param aChatroomId  聊天室ID
- *  @param pError       错误信息
- *
- *  @result 退出的聊天室, 失败返回nil
+ *  @result 退出的聊天室
  *
  *  \~english
  *  Leave a chatroom
  *
- *  Synchronization method will block the current thread
- *
- *  @param aChatroomId  Chatroom id
- *  @param pError       Error
+ *  @param aChatroomId      Chatroom id
+ *  @param aSuccessBlock    The callback block of success
+ *  @param aFailureBlock    The callback block of failure
  *
  *  @result Leaved chatroom
  */
-- (EMChatroom *)leaveChatroom:(NSString *)aChatroomId
-                        error:(EMError **)pError;
+- (void)asyncLeaveChatroom:(NSString *)aChatroomId
+                   success:(void (^)(EMChatroom *aRoom))aSuccessBlock
+                   failure:(void (^)(EMError *aError))aFailureBlock;
 
 @end
