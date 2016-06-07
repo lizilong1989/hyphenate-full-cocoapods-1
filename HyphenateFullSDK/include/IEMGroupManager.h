@@ -1,11 +1,4 @@
 /*!
- *  \~chinese
- *  @header IEMGroupManager.h
- *  @abstract 此协议定义了群组相关操作
- *  @author Hyphenate
- *  @version 3.00
- *
- *  \~english
  *  @header IEMGroupManager.h
  *  @abstract This protocol defined the group operations
  *  @author Hyphenate
@@ -20,10 +13,6 @@
 #import "EMCursorResult.h"
 
 /*!
- *  \~chinese
- *  群组相关操作
- *
- *  \~english
  *  Group operations
  */
 @protocol IEMGroupManager <NSObject>
@@ -33,13 +22,6 @@
 #pragma mark - Delegate
 
 /*!
- *  \~chinese
- *  添加回调代理
- *
- *  @param aDelegate  要添加的代理
- *  @param aQueue     添加回调代理
- *
- *  \~english
  *  Add delegate
  *
  *  @param aDelegate  Delegate
@@ -49,12 +31,6 @@
       delegateQueue:(dispatch_queue_t)aQueue;
 
 /*!
- *  \~chinese
- *  移除回调代理
- *
- *  @param aDelegate  要移除的代理
- *
- *  \~english
  *  Remove delegate
  *
  *  @param aDelegate  Delegate
@@ -64,12 +40,6 @@
 #pragma mark - Get Group
 
 /*!
- *  \~chinese
- *  获取所有群组，如果内存中不存在，则先从DB加载
- *
- *  @result 群组列表<EMGroup>
- *
- *  \~english
  *  Get all groups, will load from DB if not exist in memory
  *
  *  @result Group list<EMGroup>
@@ -77,12 +47,6 @@
 - (NSArray *)getAllGroups;
 
 /*!
- *  \~chinese
- *  从数据库加载所有群组，加载后更新内存中的群组列表
- *
- *  @result 群组列表<EMGroup>
- *
- *  \~english
  *  Load all groups from DB, will update group list in memory after loading
  *
  *  @result Group list<EMGroup>
@@ -90,12 +54,6 @@
 - (NSArray *)loadAllMyGroupsFromDB;
 
 /*!
- *  \~chinese
- *  从内存中获取屏蔽了推送的群组ID列表
- *
- *  @result 群组ID列表<NSString>
- *
- *  \~english
  *  Get ID list of groups which block push from memory
  *
  *  @result Group id list<NSString>
@@ -104,14 +62,6 @@
 
 
 /**
- *  \~chinese
- *  从服务器获取用户所有的群组，成功后更新DB和内存中的群组列表
- *
- *  @param aSuccessBlock    成功的回调
- *  @param aFailureBlock    失败的回调
- *
- *
- *  \~english
  *  Get all of user's groups from server, will update group list in memory and DB after success
  *
  *  @param aSuccessBlock    The callback block of success
@@ -122,16 +72,6 @@
                            failure:(void (^)(EMError *aError))aFailureBlock;
 
 /*!
- *  \~chinese
- *  从服务器获取指定范围内的公开群
- *
- *  @param aCursor          获取公开群的cursor，首次调用传空
- *  @param aPageSize        期望返回结果的数量, 如果 < 0 则一次返回所有结果
- *  @param aSuccessBlock    成功的回调
- *  @param aFailureBlock    失败的回调
- *
- *
- *  \~english
  *  Get public groups in the specified range from the server
  *
  *  @param aCursor          Cursor, input nil the first time
@@ -146,15 +86,6 @@
                                          failure:(void (^)(EMError *aError))aFailureBlock;
 
 /*!
- *  \~chinese
- *  根据群ID搜索公开群
- *
- *  @param aGroundId        群组id
- *  @param aSuccessBlock    成功的回调
- *  @param aFailureBlock    失败的回调
- *
- *
- *  \~english
  *  Search public group with the id
  *
  *  @param aGroundId        Group id
@@ -167,19 +98,6 @@
                              failure:(void (^)(EMError *aError))aFailureBlock;
 
 /*!
- *  \~chinese
- *  创建群组
- *
- *  @param aSubject         群组名称
- *  @param aDescription     群组描述
- *  @param aInvitees        群组成员（不包括创建者自己）
- *  @param aMessage         邀请消息
- *  @param aSetting         群组属性
- *  @param aSuccessBlock    The callback block of success
- *  @param aFailureBlock    The callback block of failure
- *
- *
- *  \~english
  *  Create a group
  *
  *  @param aSubject         Group subject
@@ -200,16 +118,6 @@
                             failure:(void (^)(EMError *aError))aFailureBlock;
 
 /*!
- *  \~chinese
- *  获取群组详情
- *
- *  @param aGroupId              群组ID
- *  @param aIncludeMembersList   是否获取成员列表
- *  @param aSuccessBlock         成功的回调
- *  @param aFailureBlock         失败的回调
- *
- *
- *  \~english
  *  Fetch group info
  *
  *  @param aGroupId              Group id
@@ -224,15 +132,6 @@
                     failure:(void (^)(EMError *aError))aFailureBlock;
 
 /*!
- *  \~chinese
- *  获取群组黑名单列表, 需要owner权限
- *
- *  @param aGroupId         群组ID
- *  @param aSuccessBlock    成功的回调
- *  @param aFailureBlock    失败的回调
- *
- *
- *  \~english
  *  Get group‘s blacklist, need owner’s authority
  *
  *  @param aGroupId         Group id
@@ -245,17 +144,6 @@
                         failure:(void (^)(EMError *aError))aFailureBlock;
 
 /*!
- *  \~chinese
- *  邀请用户加入群组
- *
- *  @param aOccupants       被邀请的用户名列表
- *  @param aGroupId         群组ID
- *  @param aWelcomeMessage  欢迎信息
- *  @param aSuccessBlock    成功的回调
- *  @param aFailureBlock    失败的回调
- *
- *
- *  \~english
  *  Invite User to join a group
  *
  *  @param aOccupants       Invited users
@@ -272,16 +160,6 @@
                   failure:(void (^)(EMError *aError))aFailureBlock;
 
 /*!
- *  \~chinese
- *  将群成员移出群组, 需要owner权限
- *
- *  @param aOccupants       要移出群组的用户列表
- *  @param aGroupId         群组ID
- *  @param aSuccessBlock    成功的回调
- *  @param aFailureBlock    失败的回调
- *
- *
- *  \~english
  *  Remove members from group, need owner‘s authority
  *
  *  @param aOccupants       Users to be removed
@@ -296,16 +174,6 @@
                      failure:(void (^)(EMError *aError))aFailureBlock;
 
 /*!
- *  \~chinese
- *  加人到群组黑名单, 需要owner权限
- *
- *  @param aOccupants       要加入黑名单的用户
- *  @param aGroupId         群组ID
- *  @param aSuccessBlock    成功的回调
- *  @param aFailureBlock    失败的回调
- *
- *
- *  \~english
  *  Add users to group’s blacklist, need owner‘s authority
  *
  *  @param aOccupants       Users to be added
@@ -320,16 +188,6 @@
                     failure:(void (^)(EMError *aError))aFailureBlock;
 
 /*!
- *  \~chinese
- *  从群组黑名单中减人, 需要owner权限
- *
- *  @param aOccupants       要从黑名单中移除的用户名列表
- *  @param aGroupId         群组ID
- *  @param aSuccessBlock    成功的回调
- *  @param aFailureBlock    失败的回调
- *
- *
- *  \~english
  *  Remove users from group‘s blacklist, need owner‘s authority
  *
  *  @param aOccupants       Users to be removed
@@ -344,16 +202,6 @@
                       failure:(void (^)(EMError *aError))aFailureBlock;
 
 /*!
- *  \~chinese
- *  更改群组主题, 需要owner权限
- *
- *  @param aSubject         新主题
- *  @param aGroupId         群组ID
- *  @param aSuccessBlock    成功的回调
- *  @param aFailureBlock    失败的回调
- *
- *
- *  \~english
  *  Change group’s subject, need owner‘s authority
  *
  *  @param aSubject         New group‘s subject
@@ -368,16 +216,6 @@
                         failure:(void (^)(EMError *aError))aFailureBlock;
 
 /*!
- *  \~chinese
- *  更改群组说明信息, 需要owner权限
- *
- *  @param aDescription     说明信息
- *  @param aGroupId         群组ID
- *  @param aSuccessBlock    成功的回调
- *  @param aFailureBlock    失败的回调
- *
- *
- *  \~english
  *  Change group’s description, need owner‘s authority
  *
  *  @param aDescription     New group‘s description
@@ -392,15 +230,6 @@
                        failure:(void (^)(EMError *aError))aFailureBlock;
 
 /*!
- *  \~chinese
- *  退出群组，owner不能退出群，只能销毁群
- *
- *  @param aGroupId         群组ID
- *  @param aSuccessBlock    成功的回调
- *  @param aFailureBlock    失败的回调
- *
- *
- *  \~english
  *  Leave a group, owner can't leave the group, can only destroy the group
  *
  *  @param aGroupId         Group id
@@ -413,14 +242,6 @@
                 failure:(void (^)(EMError *aError))aFailureBlock;
 
 /*!
- *  \~chinese
- *  解散群组, 需要owner权限
- *
- *  @param aGroupId         群组ID
- *  @param aSuccessBlock    成功的回调
- *  @param aFailureBlock    失败的回调
- *
- *  \~english
  *  Destroy a group, need owner‘s authority
  *
  *  @param aGroupId         Group id
@@ -433,14 +254,6 @@
                   failure:(void (^)(EMError *aError))aFailureBlock;
 
 /*!
- *  \~chinese
- *  屏蔽群消息，服务器不再发送此群的消息给用户，owner不能屏蔽群消息
- *
- *  @param aGroupId         要屏蔽的群ID
- *  @param aSuccessBlock    成功的回调
- *  @param aFailureBlock    失败的回调
- *
- *  \~english
  *  Block group’s message, server will blocks the messages of the group to user, owner can't block the group's message
  *
  *  @param aGroupId         Group id
@@ -453,14 +266,6 @@
                 failure:(void (^)(EMError *aError))aFailureBlock;
 
 /*!
- *  \~chinese
- *  取消屏蔽群消息
- *
- *  @param aGroupId         要取消屏蔽的群ID
- *  @param aSuccessBlock    成功的回调
- *  @param aFailureBlock    失败的回调
- *
- *  \~english
  *  Unblock group message
  *
  *  @param aGroupId         Group id
@@ -473,14 +278,6 @@
                   failure:(void (^)(EMError *aError))aFailureBlock;
 
 /*!
- *  \~chinese
- *  加入一个公开群组，群类型应该是EMGroupStylePublicOpenJoin
- *
- *  @param aGroupId         公开群组的ID
- *  @param aSuccessBlock    成功的回调
- *  @param aFailureBlock    失败的回调
- *
- *  \~english
  *  Join a public group, group style should be EMGroupStylePublicOpenJoin
  *
  *  @param aGroupId         Public group id
@@ -493,16 +290,6 @@
                      failure:(void (^)(EMError *aError))aFailureBlock;
 
 /*!
- *  \~chinese
- *  申请加入一个需批准的公开群组，群类型应该是EMGroupStylePublicJoinNeedApproval
- *
- *  @param aGroupId         公开群组的ID
- *  @param aMessage         请求加入的信息
- *  @param aSuccessBlock    成功的回调
- *  @param aFailureBlock    失败的回调
- *
- *
- *  \~english
  *  Apply to join a public group, group style should be EMGroupStylePublicJoinNeedApproval
  *
  *  @param aGroupId         Public group id
@@ -517,16 +304,6 @@
                           failure:(void (^)(EMError *aError))aFailureBlock;
 
 /*!
- *  \~chinese
- *  批准入群申请, 需要Owner权限
- *
- *  @param aGroupId         所申请的群组ID
- *  @param aUsername        申请人
- *  @param aSuccessBlock    成功的回调
- *  @param aFailureBlock    失败的回调
- *
- *
- *  \~english
  *  Accept user's application, need owner‘s authority
  *
  *  @param aGroupId         Group id
@@ -541,17 +318,6 @@
                            failure:(void (^)(EMError *aError))aFailureBlock;
 
 /*!
- *  \~chinese
- *  拒绝入群申请, 需要Owner权限
- *
- *  @param aGroupId         被拒绝的群组ID
- *  @param aUsername        申请人
- *  @param aReason          拒绝理由
- *  @param aSuccessBlock    成功的回调
- *  @param aFailureBlock    失败的回调
- *
- *
- *  \~english
  *  Decline user's application, need owner‘s authority
  *
  *  @param aGroupId         Group id
@@ -568,17 +334,6 @@
                             failure:(void (^)(EMError *aError))aFailureBlock;
 
 /*!
- *  \~chinese
- *  接受入群邀请
- *
- *  @param groupId          接受的群组ID
- *  @param aUsername        邀请者
- *  @param pError           错误信息
- *  @param aSuccessBlock    成功的回调
- *  @param aFailureBlock    失败的回调
- *
- *
- *  \~english
  *  Accept group's invitation
  *
  *  @param groupId          Group id
@@ -593,17 +348,6 @@
                                failure:(void (^)(EMError *aError))aFailureBlock;
 
 /*!
- *  \~chinese
- *  拒绝入群邀请
- *
- *  @param aGroupId         被拒绝的群组ID
- *  @param aUsername        邀请人
- *  @param aReason          拒绝理由
- *  @param aSuccessBlock    成功的回调
- *  @param aFailureBlock    失败的回调
- *
- *
- *  \~english
  *  Decline a group invitation
  *
  *  @param aGroupId         Group id
@@ -620,16 +364,6 @@
                                 failure:(void (^)(EMError *aError))aFailureBlock;
 
 /*!
- *  \~chinese
- *  屏蔽/取消屏蔽群组消息的推送
- *
- *  @param aGroupId          群组ID
- *  @param aIgnore           是否屏蔽
- *  @param aSuccessBlock     成功的回调
- *  @param aFailureBlock     失败的回调
- *
- *
- *  \~english
  *  Block / unblock group message‘s push notification
  *
  *  @param aGroupId          Group id

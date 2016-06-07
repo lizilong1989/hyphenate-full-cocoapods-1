@@ -1,11 +1,4 @@
 /*!
- *  \~chinese
- *  @header OpenGLView20.h
- *  @abstract 视频显示页面
- *  @author Hyphenate
- *  @version 3.00
- *
- *  \~english
  *  @header OpenGLView20.h
  *  @abstract Video display view
  *  @author Hyphenate

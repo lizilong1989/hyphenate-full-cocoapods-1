@@ -1,11 +1,4 @@
 /*!
- *  \~chinese
- *  @header EMSDKFull.h
- *  @abstract 包含实时通讯模块的SDK的头文件
- *  @author Hyphenate
- *  @version 3.00
- *
- *  \~english
  *  @header EMSDKFull.h
  *  @abstract Headers of SDK contains call module
  *  @author Hyphenate

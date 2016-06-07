@@ -1,11 +1,4 @@
 /*!
- *  \~chinese
- *  @header EMClient+Call.h
- *  @abstract Client的实时通讯扩展
- *  @author Hyphenate
- *  @version 3.00
- *
- *  \~english
  *  @header EMClient+Call.h
  *  @abstract Client call extension
  *  @author Hyphenate
@@ -19,10 +12,6 @@
 @interface EMClient (Call)
 
 /*!
- *  \~chinese 
- *  实时通讯模块
- *
- *  \~english 
  *  call module
  */
 @property (strong, nonatomic, readonly) id<IEMCallManager> callManager;

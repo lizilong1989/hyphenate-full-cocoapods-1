@@ -11,15 +11,6 @@
 @interface EMCallLocalView : UIView
 
 /*!
- *  \~chinese
- *  初始化LocalView
- *
- *  @param frame    localView的尺寸
- *  @param sessionPreset  输出分辨率,只支持AVCaptureSessionPreset352x288,AVCaptureSessionPreset640x480
- *
- *  @result 获取LocalView实例
- *
- *  \~english
  *  Initialization LocalView
  *
  *  @param frame    frame of localView
