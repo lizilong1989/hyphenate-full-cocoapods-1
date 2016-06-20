@@ -1,10 +1,9 @@
-//
-//  EMCallLocalView.h
-//  HyphenateSDK
-//
-//  Created by XieYajie on 2/29/16.
-//  Copyright © 2016 easemob.com. All rights reserved.
-//
+/*!
+ *  @header EMCallLocalView.h
+ *  @abstract Call LocalView
+ *  @author Hyphenate
+ *  @version 3.00
+ */
 
 #import <UIKit/UIKit.h>
 
