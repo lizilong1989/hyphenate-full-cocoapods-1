@@ -21,28 +21,67 @@
  *
  *  @param aUsername   User B
  */
-- (void)didReceiveAgreedFromUsername:(NSString *)aUsername;
+- (void)friendRequestDidApproveByUser:(NSString *)aUsername;
 
 /*!
  *  User A will receive this callback after user B declined user A's add-friend invitation
  *
  *  @param aUsername   User B
  */
-- (void)didReceiveDeclinedFromUsername:(NSString *)aUsername;
+- (void)friendRequestDidDeclineByUser:(NSString *)aUsername;
 
 /*!
  *  User A will receive this callback after User B delete the friend relationship between user A
  *
  *  @param aUsername   User B
  */
-- (void)didReceiveDeletedFromUsername:(NSString *)aUsername;
+- (void)friendshipDidRemoveByUser:(NSString *)aUsername;
 
 /*!
  *  Both user A and B will receive this callback after User B agreed user A's add-friend invitation
  *
  *  @param aUsername   Another user of user‘s friend relationship
  */
-- (void)didReceiveAddedFromUsername:(NSString *)aUsername;
+- (void)friendshipDidAddByUser:(NSString *)aUsername;
+
+/*!
+ *  User A will receive this callback after user B requested to add user A as a friend
+ *
+ *  @param aUsername   User B
+ *  @param aMessage    Friend invitation message
+ */
+- (void)friendRequestDidReceiveFromUser:(NSString *)aUsername
+                                message:(NSString *)aMessage;
+
+#pragma mark - Deprecated methods
+
+/*!
+ *  User A will receive this callback after user B agreed user A's add-friend invitation
+ *
+ *  @param aUsername   User B
+ */
+- (void)didReceiveAgreedFromUsername:(NSString *)aUsername __deprecated_msg("Use -friendRequestDidApproveByUser:");
+
+/*!
+ *  User A will receive this callback after user B declined user A's add-friend invitation
+ *
+ *  @param aUsername   User B
+ */
+- (void)didReceiveDeclinedFromUsername:(NSString *)aUsername __deprecated_msg("Use -friendRequestDidDeclineByUser:");
+
+/*!
+ *  User A will receive this callback after User B delete the friend relationship between user A
+ *
+ *  @param aUsername   User B
+ */
+- (void)didReceiveDeletedFromUsername:(NSString *)aUsername __deprecated_msg("Use -friendshipDidRemoveByUser:");
+
+/*!
+ *  Both user A and B will receive this callback after User B agreed user A's add-friend invitation
+ *
+ *  @param aUsername   Another user of user‘s friend relationship
+ */
+- (void)didReceiveAddedFromUsername:(NSString *)aUsername __deprecated_msg("Use -friendshipDidAddByUser:");
 
 /*!
  *  User A will receive this callback after user B requested to add user A as a friend
@@ -51,7 +90,7 @@
  *  @param aMessage    Friend invitation message
  */
 - (void)didReceiveFriendInvitationFromUsername:(NSString *)aUsername
-                                       message:(NSString *)aMessage;
+                                       message:(NSString *)aMessage __deprecated_msg("Use -friendRequestDidReceiveFromUser:message:");
 
 
 @end

@@ -32,7 +32,8 @@
 /*!
  *  The number of members, need to fetch group's specification
  */
-@property (nonatomic, readonly) NSInteger occupantsCount;
+@property (nonatomic, readonly) NSInteger occupantsCount __deprecated_msg("Use - membersCount");
+@property (nonatomic, readonly) NSInteger membersCount;
 
 /*!
  *  Group's setting options, need to fetch group's specification
@@ -56,7 +57,8 @@
  *
  *  Need owner's authority, will return nil if user is not the owner of the group
  */
-@property (nonatomic, strong, readonly) NSArray *bans;
+@property (nonatomic, strong, readonly) NSArray *bans __deprecated_msg("Use - blackList");
+@property (nonatomic, strong, readonly) NSArray *blackList;
 
 /*!
  *  All occupants of the group, include both the owner and all members
