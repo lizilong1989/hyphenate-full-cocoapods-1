@@ -31,6 +31,14 @@
       delegateQueue:(dispatch_queue_t)aQueue;
 
 /*!
+ *  Add delegate
+ *
+ *  @param aDelegate  Delegate
+ *
+ */
+- (void)addDelegate:(id<EMCallManagerDelegate>)aDelegate;
+
+/*!
  *  Remove delegate
  *
  *  @param aDelegate  Delegate
@@ -62,13 +70,72 @@
 /*!
  *  Start a voice call session
  *
+ *  @param aUsername        The callee
+ *  @param aCompletionBlock The callback of completion
+ *
+ */
+- (void)startVoiceCall:(NSString *)aUsername
+            completion:(void (^)(EMCallSession *aCallSession, EMError *aError))aCompletionBlock;
+
+/*!
+ *  Pause voice data transmission
+ *
+ *  @param aSessionId   Session ID
+ */
+- (void)pauseVoiceWithSession:(NSString *)aSessionId error:(EMError**)pError;
+
+/*!
+ *  Resume voice data transmission
+ *
+ *  @param aSessionId   Session ID
+ */
+- (void)resumeVoiceWithSession:(NSString *)aSessionId error:(EMError**)pError;
+
+#pragma mark - video
+
+/*!
+ *  Start a video call session
+ *
+ *  @param aUsername        The callee
+ *  @param aSuccessBlock    The callback block of completion
+ *
+ */
+- (void)startVideoCall:(NSString *)aUsername
+            completion:(void (^)(EMCallSession *aCallSession, EMError *aError))aCompletionBlock;
+
+/*!
+ * Suspend video data transmission
+ *
+ *  @param aSessionId   Session ID
+ */
+- (void)pauseVideoWithSession:(NSString *)aSessionId error:(EMError**)pError;
+
+/*!
+ *  Resume video data transmission
+ *
+ *  @param aSessionId   Session ID
+ */
+- (void)resumeVideoWithSession:(NSString *)aSessionId error:(EMError**)pError;
+
+/*!
+ *  Enable video adaptive, default is disable
+ *
+ *  @param isAdaptive   YES is enable, NO is disable
+ */
+- (void)enableAdaptiveBirateStreaming:(BOOL)isAdaptive;
+
+#pragma mark - Deprecated methods
+
+/*!
+ *  Start a voice call session
+ *
  *  @param aUsername  The callee
  *  @param pError     Error
  *
  *  @result Session instance
  */
 - (EMCallSession *)makeVoiceCall:(NSString *)aUsername
-                           error:(EMError **)pError;
+                           error:(EMError **)pError __deprecated_msg("Use -startVoiceCall:completion:");
 
 /*!
  *  Get video package lost rate
@@ -79,24 +146,22 @@
  *  @result             Error
  */
 - (EMError *)markCallSession:(NSString *)aSessionId
-                   isSilence:(BOOL)aIsSilence;
+                   isSilence:(BOOL)aIsSilence __deprecated_msg("Use -pauseVoiceWithSession:error:");
+
 
 /*!
  *  Suspend voice data transmission
  *
  *  @param aSessionId   Session ID
  */
-- (void)pauseVoiceTransfer:(NSString *)aSessionId;
+- (void)pauseVoiceTransfer:(NSString *)aSessionId __deprecated_msg("Use -pauseVoiceWithSession:error:");
 
 /*!
  *  Resume voice data transmission
  *
  *  @param aSessionId   Session ID
  */
-- (void)resumeVoiceTransfer:(NSString *)aSessionId;
-
-
-#pragma mark - video
+- (void)resumeVoiceTransfer:(NSString *)aSessionId __deprecated_msg("Use -resumeVoiceWithSession:error:");
 
 /*!
  *  Start a video call session
@@ -107,41 +172,41 @@
  *  @result Session instance
  */
 - (EMCallSession *)makeVideoCall:(NSString *)aUsername
-                           error:(EMError **)pError;
+                           error:(EMError **)pError __deprecated_msg("Use -startVideoCall:completion:");
 
 /*!
  * Suspend video data transmission
  *
  *  @param aSessionId   Session ID
  */
-- (void)pauseVideoTransfer:(NSString *)aSessionId;
+- (void)pauseVideoTransfer:(NSString *)aSessionId __deprecated_msg("Use -pauseVideoWithSession:error:");
 
 /*!
  *  Resume video data transmission
  *
  *  @param aSessionId   Session ID
  */
-- (void)resumeVideoTransfer:(NSString *)aSessionId;
+- (void)resumeVideoTransfer:(NSString *)aSessionId __deprecated_msg("Use -resumeVideoWithSession:error:");
 
 /*!
  * Suspend voice and video data transmission
  *
  *  @param aSessionId   Session ID
  */
-- (void)pauseVoiceAndVideoTransfer:(NSString *)aSessionId;
+- (void)pauseVoiceAndVideoTransfer:(NSString *)aSessionId __deprecated_msg("Delete");
 
 /*!
  *  Resume voice and video data transmission
  *
  *  @param aSessionId   Session ID
  */
-- (void)resumeVoiceAndVideoTransfer:(NSString *)aSessionId;
+- (void)resumeVoiceAndVideoTransfer:(NSString *)aSessionId __deprecated_msg("Delete");
 
 /*!
- *  open or close video adaptive,default is close
+ *  Enable video adaptive, default is disable
  *
- *  @param aFlag   YES is open,NO is close
+ *  @param aFlag   YES is enable, NO is disable
  */
-- (void)setVideoAdaptive:(BOOL)aFlag;
+- (void)setVideoAdaptive:(BOOL)aFlag  __deprecated_msg("Use -enableAdaptiveBirateStreaming:");
 
 @end

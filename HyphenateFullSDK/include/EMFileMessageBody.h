@@ -13,10 +13,10 @@
  *  Download status of attachment
  */
 typedef enum{
-    EMDownloadStatusDownloading   = 0,  /*! Downloading */
-    EMDownloadStatusSuccessed,          /*! Successed */
-    EMDownloadStatusFailed,             /*! Failed */
-    EMDownloadStatusPending,            /*! Pending */
+    EMDownloadStatusDownloading   = 0,  /*!  Downloading */
+    EMDownloadStatusSuccessed,          /*!  Successed */
+    EMDownloadStatusFailed,             /*!  Failed */
+    EMDownloadStatusPending,            /*!  Pending */
 }EMDownloadStatus;
 
 /*!

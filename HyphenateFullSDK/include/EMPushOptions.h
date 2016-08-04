@@ -19,10 +19,10 @@
  *  Display style of push message
  */
 typedef enum{
-    EMPushDisplayStyleSimpleBanner = 0, /*!
+    EMPushDisplayStyleSimpleBanner = 0, /*! 
                                          *  Simply show "You have a new message"
                                          */
-    EMPushDisplayStyleMessageSummary,   /*!
+    EMPushDisplayStyleMessageSummary,   /*! 
                                          *  Show message's content
                                          */
 }EMPushDisplayStyle;
@@ -31,9 +31,9 @@ typedef enum{
  *  Status of APNS no-disturb setting
  */
 typedef enum{
-    EMPushNoDisturbStatusDay = 0,   /*! The whole day */
-    EMPushNoDisturbStatusCustom,    /*! User defined period */
-    EMPushNoDisturbStatusClose,     /*! Close no-disturb mode */
+    EMPushNoDisturbStatusDay = 0,   /*!  The whole day */
+    EMPushNoDisturbStatusCustom,    /*!  User defined period */
+    EMPushNoDisturbStatusClose,     /*!  Close no-disturb mode */
 }EMPushNoDisturbStatus;
 
 /*!
@@ -44,7 +44,7 @@ typedef enum{
 /*!
  *  Nick name to show for push message
  */
-@property (nonatomic, strong) NSString *nickname;
+@property (nonatomic, copy) NSString *nickname;
 
 /*!
  *  Display style of push message

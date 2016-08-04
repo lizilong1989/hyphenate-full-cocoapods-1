@@ -28,13 +28,13 @@
  *
  *  It's effective only when enableDnsConfig is NO. Can only set when initialize SDK [EMClient initializeSDKWithOptions:], can't change it in runtime
  */
-@property (nonatomic, strong) NSString *chatServer;
+@property (nonatomic, copy) NSString *chatServer;
 
 /*!
  *  REST server
  *
  *  It's effective only when enableDnsConfig is NO. Can only set when initialize SDK [EMClient initializeSDKWithOptions:], can't change it in runtime
  */
-@property (nonatomic, strong) NSString *restServer;
+@property (nonatomic, copy) NSString *restServer;
 
 @end

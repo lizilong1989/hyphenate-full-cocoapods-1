@@ -11,8 +11,8 @@
  *  Network Connection Status
  */
 typedef enum{
-    EMConnectionConnected = 0,  /*! Connected */
-    EMConnectionDisconnected,   /*! Not connected */
+    EMConnectionConnected = 0,  /*! * Connected */
+    EMConnectionDisconnected,   /*! * Not connected */
 }EMConnectionState;
 
 @class EMError;
@@ -26,6 +26,37 @@ typedef enum{
 
 /*!
  *  Connection to the server status changes will receive the callback
+ *
+ *  calling the method causes:
+ *  1. After successful login, the phone can not access
+ *  2. After a successful login, network status change
+ *
+ *  @param aConnectionState Current state
+ */
+- (void)connectionStateDidChange:(EMConnectionState)aConnectionState;
+
+/*!
+ *  Callback Automatic login fails
+ *
+ *  @param aError Error
+ */
+- (void)autoLoginDidCompleteWithError:(EMError *)aError;
+
+/*!
+ *  Will receive this callback when current account login from other device
+ */
+- (void)userAccountDidLoginFromOtherDevice;
+
+/*!
+ *  Will receive this callback if current account is deleted from server
+ */
+
+- (void)userAccountDidRemoveFromServer;
+
+#pragma mark - Deprecated methods
+
+/*!
+ *  Connection to the server status changes will receive the callback
  *  
  *  calling the method causes:
  *  1. After successful login, the phone can not access
@@ -33,23 +64,23 @@ typedef enum{
  *  
  *  @param aConnectionState Current state
  */
-- (void)didConnectionStateChanged:(EMConnectionState)aConnectionState;
+- (void)didConnectionStateChanged:(EMConnectionState)aConnectionState __deprecated_msg("Use -connectionStateDidChange:");
 
 /*!
  *  Callback Automatic login fails
  *
  *  @param aError Error
  */
-- (void)didAutoLoginWithError:(EMError *)aError;
+- (void)didAutoLoginWithError:(EMError *)aError __deprecated_msg("Use -autoLoginDidCompleteWithError:");
 
 /*!
- *  Current login account to log in on other devices will receive the callback
+ *  Will receive this callback when current account login from other device
  */
-- (void)didLoginFromOtherDevice;
+- (void)didLoginFromOtherDevice __deprecated_msg("Use -userAccountDidLoginFromOtherDevice");
 
 /*!
  *  Current login account will receive the callback is deleted from the server
  */
-- (void)didRemovedFromServer;
+- (void)didRemovedFromServer __deprecated_msg("Use -userAccountDidRemoveFromServer");
 
 @end

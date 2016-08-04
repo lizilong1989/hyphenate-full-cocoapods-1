@@ -22,7 +22,7 @@
 /*!
  *  Error description
  */
-@property (nonatomic, strong) NSString *errorDescription;
+@property (nonatomic, copy) NSString *errorDescription;
 
 
 /*!

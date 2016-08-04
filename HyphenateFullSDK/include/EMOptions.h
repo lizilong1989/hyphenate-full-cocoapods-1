@@ -11,9 +11,9 @@
  *  Log output level
  */
 typedef enum {
-    EMLogLevelDebug = 0, /*! Output all log */
-    EMLogLevelWarning,   /*! Output warning and error */
-    EMLogLevelError      /*! Output error only */
+    EMLogLevelDebug = 0, /*!  Output all log */
+    EMLogLevelWarning,   /*!  Output warning and error */
+    EMLogLevelError      /*!  Output error only */
 } EMLogLevel;
 
 /*!
@@ -24,7 +24,7 @@ typedef enum {
 /*!
  *  Application's unique identifier
  */
-@property (nonatomic, strong, readonly) NSString *appkey;
+@property (nonatomic, copy, readonly) NSString *appkey;
 
 /*!
  *  Whether print log to console, default is NO
@@ -95,7 +95,7 @@ typedef enum {
  *
  *  Can only set when initialize SDK [EMClient initializeSDKWithOptions:], can't change it in runtime
  */
-@property (nonatomic, strong) NSString *apnsCertName;
+@property (nonatomic, copy) NSString *apnsCertName;
 
 /*!
  *  Get SDK setting options instance

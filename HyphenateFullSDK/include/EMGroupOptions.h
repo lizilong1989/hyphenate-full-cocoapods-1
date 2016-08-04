@@ -14,10 +14,10 @@
  *  Group style
  */
 typedef enum{
-    EMGroupStylePrivateOnlyOwnerInvite  = 0,    /*! Private groups, only owner can invite users to join */
-    EMGroupStylePrivateMemberCanInvite,         /*! Private groups, both owner and members can invite users to join  */
-    EMGroupStylePublicJoinNeedApproval,         /*! Public groups, owner can invite users to join; User can join group after owner accept user's application */
-    EMGroupStylePublicOpenJoin,                 /*! Public groups, user can join the group freely */
+    EMGroupStylePrivateOnlyOwnerInvite  = 0,    /*!  Private groups, only owner can invite users to join */
+    EMGroupStylePrivateMemberCanInvite,         /*!  Private groups, both owner and members can invite users to join  */
+    EMGroupStylePublicJoinNeedApproval,         /*!  Public groups, owner can invite users to join; User can join group after owner accept user's application */
+    EMGroupStylePublicOpenJoin,                 /*!  Public groups, user can join the group freely */
 }EMGroupStyle;
 
 /*!

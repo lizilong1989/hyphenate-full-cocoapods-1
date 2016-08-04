@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name         = 'HyphenateFull-SDK'
-  spec.version      = '3.1.4'
+  spec.version      = '3.1.4.1'
   spec.license 	    = { :type => 'MIT', :file => 'LICENSE' }
   spec.summary      = 'An Objective-C client for IM service'
   spec.homepage     = 'https://github.com/HyphenateInc/hyphenate-full-cocoapods'
@@ -11,6 +11,6 @@ Pod::Spec.new do |spec|
   spec.requires_arc = true
   spec.frameworks   = 'CoreMedia', 'AudioToolbox', 'AVFoundation', 'ImageIO', 'MobileCoreServices'
   spec.libraries    = 'iconv', 'c++', 'z', 'sqlite3', 'stdc++.6.0.9'
-  spec.vendored_libraries = ['HyphenateFullSDK/lib/libHyphenateFullSDK_*.a','HyphenateFullSDK/lib/3rdparty/*.a']
+  spec.vendored_libraries = ['HyphenateFullSDK/lib/libHyphenateFullSDK*.a','HyphenateFullSDK/lib/3rdparty/*.a']
   spec.xcconfig     = {'OTHER_LDFLAGS' => '-ObjC'}
 end

@@ -40,6 +40,13 @@
       delegateQueue:(dispatch_queue_t)aQueue;
 
 /*!
+ *  Add delegate
+ *
+ *  @param aDelegate  Delegate
+ */
+- (void)addDelegate:(id<EMChatManagerDelegate>)aDelegate;
+
+/*!
  *  Remove delegate
  *
  *  @param aDelegate  Delegate
@@ -54,15 +61,6 @@
  *  @result Conversation list<EMConversation>
  */
 - (NSArray *)getAllConversations;
-
-/*!
- *  Load all conversations from DB, will update conversation list in memory after this method is called
- *
- *  Synchronization method will block the current thread
- *
- *  @result Conversation list<EMConversation>
- */
-- (NSArray *)loadAllConversationsFromDB;
 
 /*!
  *  Get a conversation
@@ -80,33 +78,36 @@
 /*!
  *  Delete a conversation
  *
- *  @param aConversationId  Conversation id
- *  @param aDeleteMessage   Whether delete messages
+ *  @param aConversationId      Conversation id
+ *  @param isDeleteMessages     Whether delete messages
+ *  @param aCompletionBlock     The callback block of completion
  *
- *  @result Whether deleted successfully
  */
-- (BOOL)deleteConversation:(NSString *)aConversationId
-            deleteMessages:(BOOL)aDeleteMessage;
+- (void)deleteConversation:(NSString *)aConversationId
+          isDeleteMessages:(BOOL)aIsDeleteMessages
+                completion:(void (^)(NSString *aConversationId, EMError *aError))aCompletionBlock;
 
 /*!
  *  Delete multiple conversations
  *
- *  @param aConversations  Conversation list<EMConversation>
- *  @param aDeleteMessage  Whether delete messages
+ *  @param aConversations       Conversation list<EMConversation>
+ *  @param aIsDeleteMessages    Whether delete messages
+ *  @param aCompletionBlock     The callback block of completion
  *
- *  @result Whether deleted successfully
  */
-- (BOOL)deleteConversations:(NSArray *)aConversations
-             deleteMessages:(BOOL)aDeleteMessage;
+- (void)deleteConversations:(NSArray *)aConversations
+           isDeleteMessages:(BOOL)aIsDeleteMessages
+                 completion:(void (^)(EMError *aError))aCompletionBlock;
 
 /*!
  *  Import multiple conversations to DB
  *
- *  @param aConversations  Conversation list<EMConversation>
+ *  @param aConversations   Conversation list<EMConversation>
+ *  @param aCompletionBlock The callback block of completion
  *
- *  @result Whether imported successfully
  */
-- (BOOL)importConversations:(NSArray *)aConversations;
+- (void)importConversations:(NSArray *)aConversations
+                 completion:(void (^)(EMError *aError))aCompletionBlock;
 
 #pragma mark - Message
 
@@ -123,10 +124,132 @@
  *  Import multiple messages
  *
  *  @param aMessages  Message list<EMMessage>
+ *  @param aCompletionBlock The callback block of completion
+ *
+ */
+- (void)importMessages:(NSArray *)aMessages
+            completion:(void (^)(EMError *aError))aCompletionBlock;
+
+/*!
+ *  Update message to DB
+ *
+ *  @param aMessage  Message
+ *  @param aSuccessBlock    The callback block of completion
+ *
+ */
+- (void)updateMessage:(EMMessage *)aMessage
+           completion:(void (^)(EMMessage *aMessage, EMError *aError))aCompletionBlock;
+
+/*!
+ *  Send read ack for message
+ *
+ *  Asynchronous methods
+ *
+ *  @param aMessage  Message instance
+ *  @param aCompletionBlock    The callback block of completion
+ *
+ */
+- (void)sendMessageReadAck:(EMMessage *)aMessage
+                     completion:(void (^)(EMMessage *aMessage, EMError *aError))aCompletionBlock;
+
+/*!
+ *  Send a message
+ *
+ *  Asynchronous methods
+ *
+ *  @param aMessage            Message instance
+ *  @param aProgressBlock      The block of attachment upload progress
+ *  @param aCompletion         The block of send complete
+ */
+- (void)sendMessage:(EMMessage *)aMessage
+           progress:(void (^)(int progress))aProgressBlock
+         completion:(void (^)(EMMessage *message, EMError *error))aCompletionBlock;
+
+/*!
+ *  Resend Message
+ *
+ *  @param aMessage         Message instance
+ *  @param aProgressBlock   The callback block of attachment upload progress
+ *  @param aCompletion      The callback block of send complete
+ */
+- (void)resendMessage:(EMMessage *)aMessage
+                  progress:(void (^)(int progress))aProgressBlock
+                completion:(void (^)(EMMessage *message, EMError *error))aCompletionBlock;
+
+/*!
+ *  Download message thumbnail attachments (thumbnails of image message or first frame of video image), SDK can download thumbail automatically, so user should NOT download thumbail manually except automatic download failed
+ *
+ *  @param aMessage            Message instance
+ *  @param aProgressBlock      The callback block of attachment download progress
+ *  @param aCompletion         The callback block of download complete
+ */
+- (void)downloadMessageThumbnail:(EMMessage *)aMessage
+                        progress:(void (^)(int progress))aProgressBlock
+                      completion:(void (^)(EMMessage *message, EMError *error))aCompletionBlock;
+
+/*!
+ *  Download message attachment(voice, video, image or file), SDK can download voice automatically, so user should NOT download voice manually except automatic download failed
+ *
+ *  Asynchronous methods
+ *
+ *  @param aMessage            Message instance
+ *  @param aProgressBlock      The callback block of attachment download progress
+ *  @param aCompletion         The callback block of download complete
+ */
+- (void)downloadMessageAttachment:(EMMessage *)aMessage
+                         progress:(void (^)(int progress))aProgressBlock
+                       completion:(void (^)(EMMessage *message, EMError *error))aCompletionBlock;
+
+#pragma mark - Deprecated methods
+
+/*!
+ *  Load all conversations from DB, will update conversation list in memory after this method is called
+ *
+ *  Synchronization method will block the current thread
+ *
+ *  @result Conversation list<EMConversation>
+ */
+- (NSArray *)loadAllConversationsFromDB __deprecated_msg("Use -getAllConversations");
+
+/*!
+ *  Delete a conversation
+ *
+ *  @param aConversationId  Conversation id
+ *  @param aDeleteMessage   Whether delete messages
+ *
+ *  @result Whether deleted successfully
+ */
+- (BOOL)deleteConversation:(NSString *)aConversationId
+            deleteMessages:(BOOL)aDeleteMessage __deprecated_msg("Use -deleteConversation:isDeleteMessages:completion:");
+
+/*!
+ *  Delete multiple conversations
+ *
+ *  @param aConversations  Conversation list<EMConversation>
+ *  @param aDeleteMessage  Whether delete messages
+ *
+ *  @result Whether deleted successfully
+ */
+- (BOOL)deleteConversations:(NSArray *)aConversations
+             deleteMessages:(BOOL)aDeleteMessage __deprecated_msg("Use -deleteConversations:isDeleteMessages:completion:");
+
+/*!
+ *  Import multiple conversations to DB
+ *
+ *  @param aConversations  Conversation list<EMConversation>
  *
  *  @result Whether imported successfully
  */
-- (BOOL)importMessages:(NSArray *)aMessages;
+- (BOOL)importConversations:(NSArray *)aConversations __deprecated_msg("Use -importConversations:completion:");
+
+/*!
+ *  Import multiple messages
+ *
+ *  @param aMessages  Message list<EMMessage>
+ *
+ *  @result Whether imported successfully
+ */
+- (BOOL)importMessages:(NSArray *)aMessages __deprecated_msg("Use -importMessages:completion:");
 
 /*!
  *  Update message to DB
@@ -135,7 +258,7 @@
  *
  *  @result Whether updated successfully
  */
-- (BOOL)updateMessage:(EMMessage *)aMessage;
+- (BOOL)updateMessage:(EMMessage *)aMessage __deprecated_msg("Use -updateMessage:completion:");
 
 /*!
  *  Send read ack for message
@@ -144,7 +267,7 @@
  *
  *  @param aMessage  Message instance
  */
-- (void)asyncSendReadAckForMessage:(EMMessage *)aMessage;
+- (void)asyncSendReadAckForMessage:(EMMessage *)aMessage __deprecated_msg("Use -sendMessageReadAck:completion:");
 
 /*!
  *  Send a message
@@ -158,8 +281,7 @@
  */
 - (void)asyncSendMessage:(EMMessage *)aMessage
                 progress:(void (^)(int progress))aProgressCompletion
-              completion:(void (^)(EMMessage *message,
-                                   EMError *error))aCompletion;
+              completion:(void (^)(EMMessage *message, EMError *error))aCompletion __deprecated_msg("Use -sendMessage:progress:completion:");
 
 /*!
  *  Resend Message
@@ -172,8 +294,7 @@
  */
 - (void)asyncResendMessage:(EMMessage *)aMessage
                   progress:(void (^)(int progress))aProgressCompletion
-                completion:(void (^)(EMMessage *message,
-                                     EMError *error))aCompletion;
+                completion:(void (^)(EMMessage *message, EMError *error))aCompletion __deprecated_msg("Use -resendMessage:progress:completion:");
 
 /*!
  *  Download message thumbnail attachments (thumbnails of image message or first frame of video image), SDK can download thumbail automatically, so user should NOT download thumbail manually except automatic download failed
@@ -186,8 +307,7 @@
  */
 - (void)asyncDownloadMessageThumbnail:(EMMessage *)aMessage
                              progress:(void (^)(int progress))aProgressCompletion
-                           completion:(void (^)(EMMessage * message,
-                                                EMError *error))aCompletion;
+                           completion:(void (^)(EMMessage * message, EMError *error))aCompletion __deprecated_msg("Use -downloadMessageThumbnail:progress:completion:");
 
 /*!
  *  Download message attachment(voice, video, image or file), SDK can download voice automatically, so user should NOT download voice manually except automatic download failed
@@ -200,8 +320,6 @@
  */
 - (void)asyncDownloadMessageAttachments:(EMMessage *)aMessage
                                progress:(void (^)(int progress))aProgressCompletion
-                             completion:(void (^)(EMMessage *message,
-                                                  EMError *error))aCompletion;
-
+                             completion:(void (^)(EMMessage *message, EMError *error))aCompletion __deprecated_msg("Use -downloadMessageAttachment:progress:completion");
 
 @end

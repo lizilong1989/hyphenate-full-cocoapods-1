@@ -13,27 +13,27 @@
  *  Chat type
  */
 typedef enum{
-    EMChatTypeChat   = 0,   /*! Chat */
-    EMChatTypeGroupChat,    /*! Group chat */
-    EMChatTypeChatRoom,     /*! Chatroom chat */
+    EMChatTypeChat   = 0,   /*!  Chat */
+    EMChatTypeGroupChat,    /*!  Group chat */
+    EMChatTypeChatRoom,     /*!  Chatroom chat */
 }EMChatType;
 
 /*!
  *   Message Status
  */
 typedef enum{
-    EMMessageStatusPending  = 0,    /*! Pending */
-    EMMessageStatusDelivering,      /*! Delivering */
-    EMMessageStatusSuccessed,       /*! Successed */
-    EMMessageStatusFailed,          /*! Failed */
+    EMMessageStatusPending  = 0,    /*!  Pending */
+    EMMessageStatusDelivering,      /*!  Delivering */
+    EMMessageStatusSuccessed,       /*!  Successed */
+    EMMessageStatusFailed,          /*!  Failed */
 }EMMessageStatus;
 
 /*!
  *  Message direction
  */
 typedef enum{
-    EMMessageDirectionSend = 0,    /*! Send */
-    EMMessageDirectionReceive,     /*! Receive */
+    EMMessageDirectionSend = 0,    /*!  Send */
+    EMMessageDirectionReceive,     /*!  Receive */
 }EMMessageDirection;
 
 /*!
