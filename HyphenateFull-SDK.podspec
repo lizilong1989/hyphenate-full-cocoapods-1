@@ -11,6 +11,6 @@ Pod::Spec.new do |spec|
   spec.requires_arc = true
   spec.frameworks   = 'CoreMedia', 'AudioToolbox', 'AVFoundation', 'ImageIO', 'MobileCoreServices'
   spec.libraries    = 'iconv', 'c++', 'z', 'sqlite3', 'stdc++.6.0.9'
-  spec.vendored_libraries = ['HyphenateFullSDK/lib/libHyphenateFullSDK*.a','HyphenateFullSDK/lib/3rdparty/*.a']
+  spec.vendored_libraries = ['HyphenateFullSDK/lib/libHyphenateFullSDK*.a']
   spec.xcconfig     = {'OTHER_LDFLAGS' => '-ObjC'}
 end
