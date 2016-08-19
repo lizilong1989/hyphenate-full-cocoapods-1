@@ -18,7 +18,7 @@ typedef enum{
     EMMessageBodyTypeLocation,      /*!  Location */
     EMMessageBodyTypeVoice,         /*!  Voice */
     EMMessageBodyTypeFile,          /*!  File */
-    EMMessageBodyTypeCmd,           /*!  Cmd */
+    EMMessageBodyTypeCmd,           /*!  Command */
 }EMMessageBodyType;
 
 /*!

@@ -1,6 +1,6 @@
 /*!
  *  @header EMPushOptions.h
- *  @abstract Setting options of Apple APNS
+ *  @abstract Setting options of Apple Push Notification
  *  @author Hyphenate
  *  @version 3.00
  */
@@ -28,7 +28,7 @@ typedef enum{
 }EMPushDisplayStyle;
 
 /*!
- *  Status of APNS no-disturb setting
+ *  Status of Push Notification no-disturb setting
  */
 typedef enum{
     EMPushNoDisturbStatusDay = 0,   /*!  The whole day */
@@ -37,32 +37,33 @@ typedef enum{
 }EMPushNoDisturbStatus;
 
 /*!
- *  Apple APNS setting options
+ *  Apple Push Notification setting options
  */
 @interface EMPushOptions : NSObject
 
 /*!
- *  Nick name to show for push message
+ *  User's nickname to be displayed in apple push notification service messages
  */
-@property (nonatomic, copy) NSString *nickname;
+@property (nonatomic, copy) NSString *nickname __deprecated_msg("Use - displayName");
+@property (nonatomic, copy) NSString *displayName;
 
 /*!
- *  Display style of push message
+ *  Display style of notification message
  */
 @property (nonatomic) EMPushDisplayStyle displayStyle;
 
 /*!
- *  No-disturb setting of push message
+ *  No disturbing setting of notification message
  */
 @property (nonatomic) EMPushNoDisturbStatus noDisturbStatus;
 
 /*!
- *  No-disturn mode start time, only supports hour
+ *  No disturbing mode start time (in hour)
  */
 @property (nonatomic) NSInteger noDisturbingStartH;
 
 /*!
- *  No-disturn mode end time, only supports hour
+ *  No disturbing mode end time (in hour)
  */
 @property (nonatomic) NSInteger noDisturbingEndH;
 

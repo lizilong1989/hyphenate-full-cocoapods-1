@@ -13,10 +13,10 @@
 /*!
  *  Initialization LocalView
  *
- *  @param frame    frame of localView
- *  @param sessionPreset    output resolution,only support AVCaptureSessionPreset352x288 and AVCaptureSessionPreset640x480
+ *  @param frame    Frame of localView
+ *  @param sessionPreset    AVCaptureSession output resolution, currently support AVCaptureSessionPreset352x288 and AVCaptureSessionPreset640x480
  *
- *  @result Get instance of LocalView
+ *  @result     Returns a LocalView instance
  */
 - (instancetype)initWithFrame:(CGRect)frame withSessionPreset:(NSString*)aSessionPreset;
 
