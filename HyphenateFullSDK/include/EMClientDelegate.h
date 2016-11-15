@@ -48,4 +48,9 @@ typedef enum{
  */
 - (void)userAccountDidRemoveFromServer;
 
+/*!
+ *  User is forbidden
+ */
+- (void)userDidForbidByServer;
+
 @end

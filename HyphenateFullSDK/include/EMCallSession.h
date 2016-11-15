@@ -9,65 +9,8 @@
 
 #import "EMCallLocalView.h"
 #import "EMCallRemoteView.h"
-
-/*!
- *  Call session status
- */
-typedef enum{
-    EMCallSessionStatusDisconnected = 0,    /*!  Disconnected */
-    EMCallSessionStatusRinging,             /*!  Callee is Ringing */
-    EMCallSessionStatusConnecting,          /*!  Waiting for the recipient to pickup */
-    EMCallSessionStatusConnected,           /*!  Connection is established */
-    EMCallSessionStatusAccepted,            /*!  Accepted */
-}EMCallSessionStatus;
-
-/*!
- *  Call type
- */
-typedef enum{
-    EMCallTypeVoice = 0,    /*!  Voice call */
-    EMCallTypeVideo,        /*!  Video call */
-}EMCallType;
-
-/*!
- *  Call end cause
- */
-typedef enum{
-    EMCallEndReasonHangup   = 0,    /*!  The recipient hung up */
-    EMCallEndReasonNoResponse,      /*!  No response from recipient */
-    EMCallEndReasonDecline,         /*!  The recipient declined the call */
-    EMCallEndReasonBusy,            /*!  The recipient was busy */
-    EMCallEndReasonFailed,          /*!  Failed to establishing the connection */
-}EMCallEndReason;
-
-/*!
- *  Call connection type
- */
-typedef enum{
-    EMCallConnectTypeNone = 0,  /*!  No connection */
-    EMCallConnectTypeDirect,    /*!   Direct connection */
-    EMCallConnectTypeRelay,     /*!  Relay connection */
-}EMCallConnectType;
-
-
-/*!
- *  Call status
- */
-typedef enum{
-    EMCallStreamStatusVoicePause = 0,  /*!  Pause voice streaming */
-    EMCallStreamStatusVoiceResume,     /*!  Resume voice streaming */
-    EMCallStreamStatusVideoPause,      /*!  Pause video streaming */
-    EMCallStreamStatusVideoResume,     /*!  Resume video streaming */
-}EMCallStreamingStatus;
-
-/*!
- *  Call Network status
- */
-typedef enum{
-    EMCallNetworkStatusNormal = 0,  /*!  Network Available  */
-    EMCallNetworkStatusUnstable,    /*!  Network Unstable */
-    EMCallNetworkStatusNoData,      /*!  Network Unavailable */
-}EMCallNetworkStatus;
+#import "EMCallEnum.h"
+#import "EMCommonDefs.h"
 
 /*!
  *  Call session
@@ -76,19 +19,14 @@ typedef enum{
 @interface EMCallSession : NSObject
 
 /*!
- *  Unique session id
+ *  Unique call id
  */
-@property (nonatomic, strong, readonly) NSString *sessionId;
+@property (nonatomic, strong, readonly) NSString *callId;
 
 /*!
  *  Local username
  */
-@property (nonatomic, strong, readonly) NSString *username;
-
-/*!
- *  The other party's username
- */
-@property (nonatomic, strong, readonly) NSString *remoteUsername;
+@property (nonatomic, strong, readonly) NSString *localName;
 
 /*!
  *  Call type
@@ -96,9 +34,14 @@ typedef enum{
 @property (nonatomic, readonly) EMCallType type;
 
 /*!
- *  Connection type
+ *  Whether it is the caller
  */
-@property (nonatomic, readonly) EMCallConnectType connectType;
+@property (nonatomic, readonly) BOOL isCaller;
+
+/*!
+ *  The other side's username
+ */
+@property (nonatomic, strong, readonly) NSString *remoteName;
 
 /*!
  *  Call session status
@@ -111,98 +54,96 @@ typedef enum{
 @property (nonatomic, strong) EMCallLocalView *localVideoView;
 
 /*!
- *  The other party's display view
+ *  Remote display view
  */
 @property (nonatomic, strong) EMCallRemoteView *remoteVideoView;
 
-/*!
- *  Video bit rate, must be set before call session is started.
- *
- *  Value range is 150-1000, the default is 600.
- */
-@property (nonatomic) int videoBitrate;
+#pragma mark - Statistics Property
 
 /*!
- *  Get voice volume of the call
- *
- *  @return Volume
+ *  Connection type
  */
-- (int)getVoiceVolume;
+@property (nonatomic, readonly) EMCallConnectType connectType;
 
 /*!
- *  Get video latency, in milliseconds, changing in real time
- *
- *  @result The delay time
+ *  Video latency, in milliseconds, changing in real time
+ *  Didn't get to show -1
  */
-- (int)getVideoLatency;
+@property (nonatomic, readonly) int videoLatency;
 
 /*!
- *  Get video frame rate, changing in real time
- *
- *  @result The video frame rate
+ *  Local video frame rate, changing in real time
+ *  Didn't get to show -1
  */
-- (int)getVideoFrameRate;
+@property (nonatomic, readonly) int localVideoFrameRate;
 
 /*!
- *  Get video package lost rate
- *
- *  @result Video package lost rate
+ *  Remote video frame rate, changing in real time
+ *  Didn't get to show -1
  */
-- (int)getVideoLostRateInPercent;
+@property (nonatomic, readonly) int remoteVideoFrameRate;
 
 /*!
- *  Get video original width
- *
- *  @result Video original width
+ *  Local the other party's bitrate, changing in real time
+ *  Didn't get to show -1
  */
-- (int)getVideoWidth;
+@property (nonatomic, readonly) int localVideoBitrate;
 
 /*!
- *  Get fixed video original height
- *
- *  @result Video original height
+ *  Remote the other party's bitrate, changing in real time
+ *  Didn't get to show -1
  */
-- (int)getVideoHeight;
+@property (nonatomic, readonly) int remoteVideoBitrate;
 
 /*!
- *  Get the other party's bitrate, changing in real time
- *
- *  @result The other party's bitrate
+ *  Local video package lost rate, changing in real time
+ *  Didn't get to show -1
  */
-- (int)getVideoRemoteBitrate;
+@property (nonatomic, readonly) int localVideoLostRateInPercent;
 
 /*!
- *  Get bitrate of video call, changing in real time
- *
- *  @result Bitrate of video call
+ *  Remote video package lost rate, changing in real time
+ *  Didn't get to show -1
  */
-- (int)getVideoLocalBitrate;
+@property (nonatomic, readonly) int remoteVideoLostRateInPercent;
 
 /*!
- *  Get a snapshot of current video screen as jpeg picture and save to the local file system.
- *
- *  @param aPath  Saved path of picture
+ *  Remote video resolution
+ *  Didn't get to show (-1,-1)
  */
-- (void)screenCaptureToFilePath:(NSString *)aPath error:(EMError**)pError;
+@property (nonatomic, readonly) CGSize remoteVideoResolution;
+
+#pragma mark - Control Stream
 
 /*!
- *  Start recording video
+ *  Suspend voice data transmission
  *
- *  @param aPath            File saved path
- *  @param aError           Error
-
- *
+ *  @result Error
  */
-- (void)startVideoRecordingToFilePath:(NSString*)aPath
-                                error:(EMError**)aError;
+- (EMError *)pauseVoice;
 
 /*!
- *  Stop recording video
+ *  Resume voice data transmission
  *
- *  @param aError           Error
- *
+ *  @result Error
  */
-- (NSString *)stopVideoRecording:(EMError**)aError;
+- (EMError *)resumeVoice;
+
+/*!
+ * Suspend video data transmission
+ *
+ *  @result Error
+ */
+- (EMError *)pauseVideo;
+
+/*!
+ *  Resume video data transmission
+ *
+ *  @result Error
+ */
+- (EMError *)resumeVideo;
+
+#pragma mark - Camera
 
 /*!
  *  Use front camera or back camera, default use front
@@ -210,5 +151,164 @@ typedef enum{
  *  @param  aIsFrontCamera    YES for front camera, NO for back camera.
  */
 - (void)switchCameraPosition:(BOOL)aIsFrontCamera;
+
+#pragma mark - EM_DEPRECATED_IOS 3.2.0
+
+/*!
+ *  Unique session id
+ */
+@property (nonatomic, strong, readonly) NSString *sessionId EM_DEPRECATED_IOS(3_1_0, 3_1_5, "Use EMCallSession.callId");
+
+/*!
+ *  Local username
+ */
+@property (nonatomic, strong, readonly) NSString *username EM_DEPRECATED_IOS(3_1_0, 3_1_5, "Use EMCallSession.localName");
+
+/*!
+ *  The other side's username
+ */
+@property (nonatomic, strong, readonly) NSString *remoteUsername EM_DEPRECATED_IOS(3_1_0, 3_1_5, "Use EMCallSession.remoteName");
+
+/*!
+ *  Video bit rate, must be set before call session is started.
+ *
+ *  Value range is 150-1000, the default is 600.
+ */
+@property (nonatomic) int videoBitrate EM_DEPRECATED_IOS(3_1_0, 3_1_5, "Use EMCallOptions.videoKbps");
+
+/*!
+ *  Get voice volume of the call
+ *
+ *  @return Volume
+ */
+- (int)getVoiceVolume EM_DEPRECATED_IOS(3_1_0, 3_1_5, "Delete");
+
+/*!
+ *  Get video latency, in milliseconds, changing in real time
+ *
+ *  @result The delay time
+ */
+- (int)getVideoLatency EM_DEPRECATED_IOS(3_1_0, 3_1_5, "Use -EMCallSession.videoLatency");
+
+/*!
+ *  Get video frame rate, changing in real time
+ *
+ *  @result The video frame rate
+ */
+- (int)getVideoFrameRate EM_DEPRECATED_IOS(3_1_0, 3_1_5, "Use -EMCallSession.remoteVideoFrameRate");
+
+/*!
+ *  Get video package lost rate
+ *
+ *  @result Video package lost rate
+ */
+- (int)getVideoLostRateInPercent EM_DEPRECATED_IOS(3_1_0, 3_1_5, "Use -EMCallSession.remoteVideoLostRateInPercent");
+
+/*!
+ *  Get video original width
+ *
+ *  @result Video original width
+ */
+- (int)getVideoWidth EM_DEPRECATED_IOS(3_1_0, 3_1_5, "Use -EMCallSession.remoteVideoResolution");
+
+/*!
+ *  Get fixed video original height
+ *
+ *  @result Video original height
+ */
+- (int)getVideoHeight EM_DEPRECATED_IOS(3_1_0, 3_1_5, "Use -EMCallSession.remoteVideoResolution");
+
+/*!
+ *  Get the other party's bitrate, changing in real time
+ *
+ *  @result The other party's bitrate
+ */
+- (int)getVideoRemoteBitrate EM_DEPRECATED_IOS(3_1_0, 3_1_5, "Use -EMCallSession.remoteVideoBitrate");
+
+/*!
+ *  Get bitrate of video call, changing in real time
+ *
+ *  @result Bitrate of video call
+ */
+- (int)getVideoLocalBitrate EM_DEPRECATED_IOS(3_1_0, 3_1_5, "Use -EMCallSession.localVideoBitrate");
+
+/*!
+ *  Get a snapshot of current video screen as jpeg picture and save to the local file system.
+ *
+ *  @param aPath  Saved path of picture
+ */
+- (void)screenCaptureToFilePath:(NSString *)aPath
+                          error:(EMError**)pError EM_DEPRECATED_IOS(3_1_0, 3_1_5, "Use -[EMPluginVideoRecorder screenCaptureToFilePath:error:]");
+
+/*!
+ *  Start recording video
+ *
+ *  @param aPath            File saved path
+ *  @param aError           Error
+ 
+ *
+ */
+- (void)startVideoRecordingToFilePath:(NSString*)aPath
+                                error:(EMError**)aError EM_DEPRECATED_IOS(3_1_0, 3_1_5, "Use -[EMPluginVideoRecorder startVideoRecordingToFilePath:error]");
+
+/*!
+ *  Stop recording video
+ *
+ *  @param aError           Error
+ *
+ */
+- (NSString *)stopVideoRecording:(EMError**)aError EM_DEPRECATED_IOS(3_1_0, 3_1_5, "Use -[EMPluginVideoRecorder stopVideoRecording:]");
+
+#pragma mark - EM_DEPRECATED_IOS < 3.2.0
+
+/*!
+ *  Get video delay time, in milliseconds, it's real time changed
+ *
+ *  @result The delay time
+ */
+- (int)getVideoTimedelay __deprecated_msg("Use -getVideoLatency");
+
+/*!
+ *  Get video frame rate, it's real time changed
+ *
+ *  @result The frame rate
+ */
+- (int)getVideoFramerate __deprecated_msg("Use -getVideoFrameRate");
+
+/*!
+ *  Get video package lost rate
+ *
+ *  @result Package lost rate
+ */
+- (int)getVideoLostcnt __deprecated_msg("Use -getVideoLostRateInPercent");
+
+/*!
+ *  Get snapshot of video
+ *
+ *  @param aFullPath  Save path of picture
+ */
+- (void)takeRemotePicture:(NSString *)aFullPath __deprecated_msg("Use -screenCaptureToFilePath:");
+
+/*!
+ *  Start recording video
+ *
+ *  @param  aPath    File save path
+ */
+- (BOOL)startVideoRecord:(NSString*)aPath __deprecated_msg("Use startVideoRecordingToFilePath:error:");
+
+/*!
+ *  Stop recording video
+ *
+ *  @result path of record file
+ */
+- (NSString *)stopVideoRecord __deprecated_msg("Use -stopVideoRecording:");
+
+/*!
+ *  Use front camera or back camera,default use front
+ *
+ *  @param  isFont    Weather use front camera or not,Yes is Front,No is Back
+ */
+- (void)setCameraBackOrFront:(BOOL)isFont __deprecated_msg("Use -switchCameraPosition:");
+
 
 @end

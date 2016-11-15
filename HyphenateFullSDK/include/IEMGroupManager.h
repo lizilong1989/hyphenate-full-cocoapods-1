@@ -61,7 +61,6 @@
  */
 - (NSArray *)getGroupsWithoutPushNotification:(EMError **)pError;
 
-#pragma mark - Async method
 
 /**
  *  Get all of user's groups from server

@@ -9,6 +9,9 @@
 
 #import "EMChatroomManagerDelegate.h"
 #import "EMChatroom.h"
+#import "EMPageResult.h"
+
+#import "EMCursorResult.h"
 
 @class EMError;
 
@@ -44,7 +47,6 @@
  */
 - (void)removeDelegate:(id<EMChatroomManagerDelegate>)aDelegate;
 
-#pragma mark - Async method
 
 /*!
  *  Get all the chatrooms from server
@@ -52,7 +54,10 @@
  *  @param aCompletionBlock     The callback block of completion
  *
  */
-- (void)getAllChatroomsFromServerWithCompletion:(void (^)(NSArray *aList, EMError *aError))aCompletionBlock;
+
+- (void)getChatroomsFromServerWithPage:(NSInteger)aPageNum
+                              pageSize:(NSInteger)aPageSize
+                            completion:(void (^)(EMPageResult *aResult, EMError *aError))aCompletionBlock;
 
 /*!
  *  Join a chatroom

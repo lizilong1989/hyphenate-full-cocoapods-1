@@ -33,6 +33,7 @@ typedef enum{
     EMErrorServerBusy,                       /*!  Server is busy */
     EMErrorServerUnknownError,               /*!  Unknown server error */
     EMErrorServerGetDNSConfigFailed,         /*!  Get DNS config failure */
+    EMErrorServerServingForbidden,           /*!  Serving is forbidden */
     
     EMErrorFileNotFound = 400,               /*!  Can't find the file */
     EMErrorFileInvalid,                      /*!  File is invalid */

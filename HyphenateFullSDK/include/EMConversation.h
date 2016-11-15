@@ -156,7 +156,7 @@ typedef enum{
                      completion:(void (^)(NSArray *aMessages, EMError *aError))aCompletionBlock;
 
 /*!
- *  Load messages with specified type, returning messages are sorted by receiving timestamp. If reference timestamp is negative, load from the latest messages; if message count is negative, load all messages that meet the condition.
+ *  Load messages with specified type, returning messages are sorted by receiving timestamp. If reference timestamp is negative, load from the latest messages; if message count is negative, count deal with 1 and load one message that meet the condition.
  *
  *  @param aType            Message type to load
  *  @param aTimestamp       Reference timestamp
@@ -174,7 +174,7 @@ typedef enum{
                   completion:(void (^)(NSArray *aMessages, EMError *aError))aCompletionBlock;
 
 /*!
- *  Load messages with specified keyword, returning messages are sorted by receiving timestamp. If reference timestamp is negative, load from the latest messages; if message count is negative, load all messages that meet the condition.
+ *  Load messages with specified keyword, returning messages are sorted by receiving timestamp. If reference timestamp is negative, load from the latest messages; if message count is negative, count deal with 1 and load one message that meet the condition.
  *
  *  @param aKeywords        Search content, will ignore it if it's empty
  *  @param aTimestamp       Reference timestamp

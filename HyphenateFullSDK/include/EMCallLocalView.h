@@ -1,23 +1,22 @@
-//
-//  EMCallLocalView.h
-//  HyphenateSDK
-//
-//  Created by XieYajie on 2/29/16.
-//  Copyright © 2016 Hyphenate.io. All rights reserved.
-//
+/*!
+ *  @header EMCallLocalView.h
+ *  @abstract Video call local view
+ *  @author Hyphenate
+ *  @version 3.00
+ */
 
+
+#import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+
+#import "EMCallEnum.h"
 
 @interface EMCallLocalView : UIView
 
 /*!
- *  Initialization LocalView
- *
- *  @param frame    Frame of localView
- *  @param sessionPreset    AVCaptureSession output resolution, currently support AVCaptureSessionPreset352x288 and AVCaptureSessionPreset640x480
- *
- *  @result     Returns a LocalView instance
+ *  Video view scale mode
  */
-- (instancetype)initWithFrame:(CGRect)frame withSessionPreset:(NSString*)aSessionPreset;
+@property (atomic, assign) EMCallViewScaleMode scaleMode;
 
 @end
+

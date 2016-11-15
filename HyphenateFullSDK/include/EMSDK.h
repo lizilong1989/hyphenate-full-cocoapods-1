@@ -15,8 +15,8 @@
 
 #else
 
-#import <HyphenateSDK/EMClient.h>
-#import <HyphenateSDK/EMClientDelegate.h>
+#import <HyphenateLite/EMClient.h>
+#import <HyphenateLite/EMClientDelegate.h>
 
 #endif
 

@@ -121,6 +121,7 @@
  */
 - (EMError *)initializeSDKWithOptions:(EMOptions *)aOptions;
 
+
 /*!
  *  Register a new IM user
  *
@@ -218,5 +219,13 @@
  *  @param aApplication  UIApplication
  */
 - (void)applicationWillEnterForeground:(id)aApplication;
+
+/*!
+ *  Need to call this method when APP receive APNs in foreground
+ *
+ *  @param application  UIApplication
+ *  @param userInfo     Push content
+ */
+- (void)application:(id)application didReceiveRemoteNotification:(NSDictionary *)userInfo;
 
 @end

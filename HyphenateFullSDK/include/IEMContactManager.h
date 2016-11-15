@@ -57,7 +57,6 @@
  */
 - (NSArray *)getBlackList;
 
-#pragma mark - Async method
 
 /*!
  *  Get all contacts from the server
