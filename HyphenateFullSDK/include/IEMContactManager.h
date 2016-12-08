@@ -81,11 +81,13 @@
 /*!
  *  Delete a contact
  *
- *  @param aUsername        The user to be deleted
- *  @param aCompletionBlock The callback block of completion
+ *  @param aUsername                The user to be deleted
+ *  @param aIsDeleteConversation    Delete the conversation or not
+ *  @param aCompletionBlock         The callback block of completion
  *
  */
 - (void)deleteContact:(NSString *)aUsername
+     isDeleteConversation:(BOOL)aIsDeleteConversation
            completion:(void (^)(NSString *aUsername, EMError *aError))aCompletionBlock;
 
 /*!
@@ -135,4 +137,15 @@
  */
 - (void)declineFriendRequestFromUser:(NSString *)aUsername
                           completion:(void (^)(NSString *aUsername, EMError *aError))aCompletionBlock;
+
+/*!
+ *  Delete a contact
+ *
+ *  @param aUsername        The user to be deleted
+ *  @param aCompletionBlock The callback block of completion
+ *
+ */
+- (void)deleteContact:(NSString *)aUsername
+           completion:(void (^)(NSString *aUsername, EMError *aError))aCompletionBlock __deprecated_msg("Use -deleteContact:username:isDeleteConversation:");
+
 @end

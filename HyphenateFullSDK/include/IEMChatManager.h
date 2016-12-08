@@ -79,7 +79,7 @@
  *  Delete a conversation
  *
  *  @param aConversationId      Conversation id
- *  @param isDeleteMessages     Whether delete messages
+ *  @param aIsDeleteMessages    Whether delete messages
  *  @param aCompletionBlock     The callback block of completion
  *
  */
@@ -134,7 +134,7 @@
  *  Update message
  *
  *  @param aMessage  Message
- *  @param aSuccessBlock    The callback block of completion
+ *  @param aCompletionBlock    The callback block of completion
  *
  */
 - (void)updateMessage:(EMMessage *)aMessage
@@ -155,9 +155,9 @@
  *  Send a message
  *
  *
- *  @param aMessage            Message instance
- *  @param aProgressBlock      The block of attachment upload progress
- *  @param aCompletion         The block of send complete
+ *  @param aMessage             Message instance
+ *  @param aProgressBlock       The block of attachment upload progress
+ *  @param aCompletionBlock     The block of send complete
  */
 - (void)sendMessage:(EMMessage *)aMessage
            progress:(void (^)(int progress))aProgressBlock
@@ -166,9 +166,9 @@
 /*!
  *  Resend Message
  *
- *  @param aMessage         Message instance
- *  @param aProgressBlock   The callback block of attachment upload progress
- *  @param aCompletion      The callback block of send complete
+ *  @param aMessage             Message instance
+ *  @param aProgressBlock       The callback block of attachment upload progress
+ *  @param aCompletionBlock     The callback block of send complete
  */
 - (void)resendMessage:(EMMessage *)aMessage
                   progress:(void (^)(int progress))aProgressBlock
@@ -177,9 +177,9 @@
 /*!
  *  Download message thumbnail (thumbnail of image message or first frame of video image), SDK downloads thumbails automatically, no need to download thumbail manually unless automatic download failed.
  *
- *  @param aMessage            Message instance
- *  @param aProgressBlock      The callback block of attachment download progress
- *  @param aCompletion         The callback block of download complete
+ *  @param aMessage             Message instance
+ *  @param aProgressBlock       The callback block of attachment download progress
+ *  @param aCompletionBlock     The callback block of download complete
  */
 - (void)downloadMessageThumbnail:(EMMessage *)aMessage
                         progress:(void (^)(int progress))aProgressBlock
@@ -189,9 +189,9 @@
  *  Download message attachment(voice, video, image or file), SDK downloads attachment automatically, no need to download attachment manually unless automatic download failed
  *
  *
- *  @param aMessage            Message instance
- *  @param aProgressBlock      The callback block of attachment download progress
- *  @param aCompletion         The callback block of download complete
+ *  @param aMessage             Message instance
+ *  @param aProgressBlock       The callback block of attachment download progress
+ *  @param aCompletionBlock     The callback block of download complete
  */
 - (void)downloadMessageAttachment:(EMMessage *)aMessage
                          progress:(void (^)(int progress))aProgressBlock

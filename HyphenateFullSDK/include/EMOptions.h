@@ -7,6 +7,8 @@
 
 #import <Foundation/Foundation.h>
 
+#import "EMCommonDefs.h"
+
 /*!
  *  Log output level
  */
@@ -37,9 +39,9 @@ typedef enum {
 @property (nonatomic, assign) EMLogLevel logLevel;
 
 /*!
- *  Whether using https, default is YES
+ *  Whether using https only, default is YES
  */
-@property (nonatomic, assign) BOOL usingHttps;
+@property (nonatomic, assign) BOOL usingHttpsOnly;
 
 /*!
  *  Whether using development environment, default is NO
@@ -105,5 +107,12 @@ typedef enum {
  *  @result SDK’s setting options instance
  */
 + (instancetype)optionsWithAppkey:(NSString *)aAppkey;
+
+#pragma mark - EM_DEPRECATED_IOS 3.2.2
+
+/*!
+ *  Whether using https, default is YES
+ */
+@property (nonatomic, assign) BOOL usingHttps EM_DEPRECATED_IOS(3_0_0, 3_2_2);
 
 @end

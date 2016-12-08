@@ -113,6 +113,13 @@
  */
 @property (nonatomic, readonly) CGSize remoteVideoResolution;
 
+/*!
+ *  Call extention
+ *
+ *  Type must be NSString
+ */
+@property (nonatomic, readonly) NSString *ext;
+
 #pragma mark - Control Stream
 
 /*!

@@ -118,7 +118,7 @@
  *  @param aCompletionBlock      The callback block of completion
  *
  */
-- (void)getGroupSpecificationFromServerByID:(NSString *)aGroupID
+- (void)getGroupSpecificationFromServerByID:(NSString *)aGroupId
                          includeMembersList:(BOOL)aIncludeMembersList
                                  completion:(void (^)(EMGroup *aGroup, EMError *aError))aCompletionBlock;
 
@@ -297,7 +297,7 @@
 /*!
  *  Accept a group invitation
  *
- *  @param groupId          Group id
+ *  @param aGroupId         Group id
  *  @param aUsername        Inviter
  *  @param aCompletionBlock The callback block of completion
  *
@@ -328,7 +328,7 @@
  *  @param aCompletionBlock  The callback block of completion
  *
  */
-- (void)updatePushServiceForGroup:(NSString *)aGroupID
+- (void)updatePushServiceForGroup:(NSString *)aGroupId
                     isPushEnabled:(BOOL)aIsEnable
                        completion:(void (^)(EMGroup *aGroup, EMError *aError))aCompletionBlock;
 

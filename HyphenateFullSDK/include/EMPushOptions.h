@@ -18,7 +18,8 @@
 /*!
  *  Display style of push message
  */
-typedef enum{
+typedef enum
+{
     EMPushDisplayStyleSimpleBanner = 0, /*! 
                                          *  Simply show "You have a new message"
                                          */

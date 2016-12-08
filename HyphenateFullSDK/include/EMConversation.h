@@ -160,7 +160,7 @@ typedef enum{
  *
  *  @param aType            Message type to load
  *  @param aTimestamp       Reference timestamp
- *  @param aLimit           Count of messages to load
+ *  @param aCount           Count of messages to load
  *  @param aUsername        Message sender (optional)
  *  @param aDirection       Message search direction
  *  @param aCompletionBlock The callback block of completion
@@ -176,7 +176,7 @@ typedef enum{
 /*!
  *  Load messages with specified keyword, returning messages are sorted by receiving timestamp. If reference timestamp is negative, load from the latest messages; if message count is negative, count deal with 1 and load one message that meet the condition.
  *
- *  @param aKeywords        Search content, will ignore it if it's empty
+ *  @param aKeyword         Search content, will ignore it if it's empty
  *  @param aTimestamp       Reference timestamp
  *  @param aCount           Count of messages to load
  *  @param aSender          Message sender (optional)
