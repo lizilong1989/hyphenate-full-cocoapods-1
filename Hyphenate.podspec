@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name         = 'Hyphenate'
-  spec.version      = '3.2.2'
+  spec.version      = '3.2.2.2'
   spec.license 	    = { :type => 'MIT', :file => 'LICENSE' }
   spec.summary      = 'An Objective-C client for IM service'
   spec.homepage     = 'https://github.com/HyphenateInc/hyphenate-full-cocoapods'
