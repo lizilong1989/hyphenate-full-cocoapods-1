@@ -1,16 +1,15 @@
 Pod::Spec.new do |spec|
   spec.name         = 'Hyphenate'
-  spec.version      = '3.2.2.2'
-  spec.license 	    = { :type => 'MIT', :file => 'LICENSE' }
+  spec.version      = '3.2.3'
+  spec.license 	     = { :type => 'Copyright', :text => 'Hyphenate Inc. 2016' }
   spec.summary      = 'An Objective-C client for IM service'
-  spec.homepage     = 'https://github.com/HyphenateInc/hyphenate-full-cocoapods'
+  spec.description  = 'Hyphenate is a cloud-based PaaS (Platform as a Service) for Mobile Instant Messaging (MIM). We provide in-app messaging features such as one-to-one chat, group chat, voice message, picture/video/file sharing, location sharing, real-time voice/video calling, etc.'
+  spec.homepage     = 'https://www.hyphenate.io/'
   spec.author       = {'Hyphenate Inc.' => 'info@hyphenate.io'}
-  spec.source       =  {:git => 'https://github.com/HyphenateInc/hyphenate-full-cocoapods.git', :tag => spec.version.to_s }
-  spec.source_files = "HyphenateFullSDK/**/*.{h}"
-  spec.platform     = :ios, '6.0'
+  spec.source       = {:http=> 'http://downloads.easemob.com/downloads/ios_IM_Hyphenate_sdk_3.2.3.zip' }
+  spec.platform     = :ios, '8.0'
   spec.requires_arc = true
-  spec.frameworks   = 'CoreMedia', 'AudioToolbox', 'AVFoundation', 'ImageIO', 'MobileCoreServices'
-  spec.libraries    = 'iconv', 'c++', 'z', 'sqlite3', 'stdc++.6.0.9'
-  spec.vendored_libraries = ['HyphenateFullSDK/lib/libHyphenateFullSDK*.a']
+  spec.preserve_paths = 'ios_IM_Hyphenate_sdk_3.2.3/HyphenateFullSDK/Hyphenate.framework'
+  spec.vendored_frameworks = 'ios_IM_Hyphenate_sdk_3.2.3/HyphenateFullSDK/Hyphenate.framework'
   spec.xcconfig     = {'OTHER_LDFLAGS' => '-ObjC'}
 end
